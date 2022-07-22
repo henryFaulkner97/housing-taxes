@@ -22,11 +22,12 @@ const fifthTaxBand = (remainingPrice) => {
     return totalTax;
 }
 
-const intToString = (totalTax) => {
-
-}
-
 const main = (purchasePrice) => {
+
+    if (typeof purchasePrice != "number" || purchasePrice < 0) {
+        return "Invalid purchase price";
+    }
+
     if (purchasePrice <= 300000) {
         var totalTax = 0;
 
@@ -46,4 +47,4 @@ const main = (purchasePrice) => {
     return totalTax.toLocaleString();
 }
 
-module.exports = {main};
+module.exports = {main, secondTaxBand, thirdTaxBand, fourthTaxBand, fifthTaxBand};
