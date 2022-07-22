@@ -1,0 +1,15 @@
+{
+  "name": "housing-taxes",
+  "version": "1.0.0",
+  "description": "Calculating housing tax, tech test BJSS.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node index.js"
+  },
+  "author": "henry.faulkner",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^28.1.3"
+  }
+}
