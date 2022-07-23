@@ -1,4 +1,5 @@
 const taxCalculator = require("./tax-calculator.js");
+const index = require("./index.js");
 
 describe('first tax band', () => {
     test('lower limit', () => {
@@ -112,4 +113,36 @@ describe('extreme values', () => {
     
         expect(actualValue).toEqual(expectedOutput);
     });
+});
+
+describe('index.js tests', () => {
+    let captureConsoleLogs = (purchasePrice) => {
+        let log = [];
+        console.log = (output) => {
+            log.push(output);
+            process.stdout.write(output + '\n');
+        };
+    
+        index.main(purchasePrice);
+    
+        return log;
+    }
+
+    test('normal purchase price', () => {
+        const purchasePrice = 1250000;
+        const expectedOutput = ["Purchase Price: £1,250,000", "Stamp Duty Tax: £68,750"];
+
+        let actualValue = captureConsoleLogs(purchasePrice);
+
+        expect(actualValue).toEqual(expectedOutput);
+    });
+
+    test('invalid purchase price', () => {
+        const purchasePrice = "invalid";
+        const expectedOutput = ["Invalid purchase price"];
+
+        let actualValue = captureConsoleLogs(purchasePrice);
+
+        expect(actualValue).toEqual(expectedOutput);
+    })
 })
