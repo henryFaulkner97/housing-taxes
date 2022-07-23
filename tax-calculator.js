@@ -1,11 +1,11 @@
 const secondTaxBand = (remainingPrice) => {
-    let totalTax = remainingPrice * 0.05;
+    let totalTax = remainingPrice * 0.02;
 
     return totalTax;
 }
 
 const thirdTaxBand = (remainingPrice) => {
-    let totalTax = 15000 + remainingPrice * 0.05;
+    let totalTax = 2500 + remainingPrice * 0.05;
 
     return totalTax;
 }
@@ -22,20 +22,20 @@ const fifthTaxBand = (remainingPrice) => {
     return totalTax;
 }
 
-const main = (purchasePrice) => {
+const calculateTax = (purchasePrice) => {
 
     if (typeof purchasePrice != "number" || purchasePrice < 0) {
-        return "Invalid purchase price";
+        throw "Invalid purchase price";
     }
 
-    if (purchasePrice <= 300000) {
+    if (purchasePrice <= 125000) {
         var totalTax = 0;
 
-    } else if (purchasePrice > 300000 & purchasePrice <= 500000 ) {
-        var totalTax = secondTaxBand(purchasePrice - 300000);
+    } else if (purchasePrice <= 250000 ) {
+        var totalTax = secondTaxBand(purchasePrice - 125000);
 
     } else if (purchasePrice <= 925000) {
-        var totalTax = thirdTaxBand(purchasePrice - 500000);
+        var totalTax = thirdTaxBand(purchasePrice - 250000);
 
     } else if (purchasePrice <= 1500000) {
         var totalTax = fourthTaxBand(purchasePrice - 925000);
@@ -47,4 +47,4 @@ const main = (purchasePrice) => {
     return totalTax.toLocaleString();
 }
 
-module.exports = {main, secondTaxBand, thirdTaxBand, fourthTaxBand, fifthTaxBand};
+module.exports = {calculateTax, secondTaxBand, thirdTaxBand, fourthTaxBand, fifthTaxBand};

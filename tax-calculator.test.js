@@ -5,16 +5,16 @@ describe('first tax band', () => {
         const purchasePrice = 0;
         const expectedOutput = "0";
 
-        let actualValue = taxCalculator.main(purchasePrice);
+        let actualValue = taxCalculator.calculateTax(purchasePrice);
 
         expect(actualValue).toEqual(expectedOutput);
     });
 
     test('upper limit', () => {
-        const purchasePrice = 300000;
+        const purchasePrice = 125000;
         const expectedOutput = "0";
 
-        let actualValue = taxCalculator.main(purchasePrice);
+        let actualValue = taxCalculator.calculateTax(purchasePrice);
 
         expect(actualValue).toEqual(expectedOutput);
     });
@@ -23,7 +23,7 @@ describe('first tax band', () => {
 describe('second tax band', () => {
     test('lower limit', () => {
         const remainingPrice = 1;
-        const expectedOutput = 0.05;
+        const expectedOutput = 0.02;
 
         let actualValue = taxCalculator.secondTaxBand(remainingPrice);
 
@@ -31,8 +31,8 @@ describe('second tax band', () => {
     });
 
     test('upper limit', () => {
-        const remainingPrice = 200000;
-        const expectedOutput = 10000;
+        const remainingPrice = 125000;
+        const expectedOutput = 2500;
 
         let actualValue = taxCalculator.secondTaxBand(remainingPrice);
 
@@ -43,7 +43,7 @@ describe('second tax band', () => {
 describe('third tax band', () => {
     test('lower limit', () => {
         const remainingPrice = 1;
-        const expectedOutput = 15000.05;
+        const expectedOutput = 2500.05;
 
         let actualValue = taxCalculator.thirdTaxBand(remainingPrice);
 
@@ -51,7 +51,7 @@ describe('third tax band', () => {
     });
 
     test('upper limit', () => {
-        const remainingPrice = 425000;
+        const remainingPrice = 675000;
         const expectedOutput = 36250;
 
         let actualValue = taxCalculator.thirdTaxBand(remainingPrice);
@@ -94,27 +94,21 @@ describe('fifth tax band', () => {
 describe('extreme values', () => {
     test('purchase price is non-number', () => {
         const purchasePrice = "not a number";
-        const expectedOutput = "Invalid purchase price";
 
-        let actualValue = taxCalculator.main(purchasePrice);
-
-        expect(actualValue).toEqual(expectedOutput);
+        expect(() => { taxCalculator.calculateTax(purchasePrice); }).toThrow("Invalid purchase price");
     });
 
     test('purchase price is below 0', () => {
         const purchasePrice = -100;
-        expectedOutput = "Invalid purchase price";
 
-        let actualValue = taxCalculator.main(purchasePrice);
-
-        expect(actualValue).toEqual(expectedOutput);
+        expect(() => { taxCalculator.calculateTax(purchasePrice); }).toThrow("Invalid purchase price");
     });
 
     test('extreme price', () => {
         const purchasePrice = 100000000
         const expectedOutput = "11,913,750";
     
-        let actualValue = taxCalculator.main(purchasePrice);
+        let actualValue = taxCalculator.calculateTax(purchasePrice);
     
         expect(actualValue).toEqual(expectedOutput);
     });

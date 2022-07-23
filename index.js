@@ -1,11 +1,11 @@
 const taxCalculator = require("./tax-Calculator.js");
 
-let purchasePrice = -100;
-let totalTax = taxCalculator.main(purchasePrice);
+let purchasePrice = 10000000;
 
-if (totalTax == "Invalid purchase price") {
-    console.log(totalTax);
+try {
+    let finalTax = taxCalculator.calculateTax(purchasePrice);
 
-} else {
-    console.log("Total stamp duty tax: £" + totalTax);
+    console.log("Stampy Duty Tax: £" + finalTax);
+} catch(err) {
+    console.log(err);
 }
