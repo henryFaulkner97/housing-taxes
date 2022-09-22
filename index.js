@@ -1,10 +1,11 @@
 const taxCalculator = require("./tax-Calculator.js");
 
 const main = (userInput) => {
-    let purchasePrice = userInput;
 
     try {
+        let purchasePrice = parseInt(userInput);
         let finalTax = taxCalculator.calculateTax(purchasePrice);
+
 
         console.log("Purchase Price: £" + purchasePrice.toLocaleString());
         console.log("Stamp Duty Tax: £" + finalTax);
@@ -14,6 +15,6 @@ const main = (userInput) => {
     }
 }
 
-main(parseInt(process.argv.slice(2)));
+main(process.argv.slice(2));
 
 module.exports = {main};

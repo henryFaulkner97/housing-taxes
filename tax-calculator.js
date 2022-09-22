@@ -24,7 +24,7 @@ const fifthTaxBand = (remainingPrice) => {
 
 const calculateTax = (purchasePrice) => {
 
-    if (typeof purchasePrice != "number" || purchasePrice < 0) {
+    if (typeof purchasePrice != "number" || purchasePrice < 0 || isNaN(purchasePrice) == true) {
         throw "Invalid purchase price";
     }
 
